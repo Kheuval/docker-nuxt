@@ -6,3 +6,7 @@ ENV HOST='0.0.0.0'
 ENV PORT='3000'
 
 WORKDIR /srv
+
+RUN npm install -g pnpm
+
+CMD [ "pnpm", "run", "dev" ]

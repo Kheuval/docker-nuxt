@@ -1,0 +1,28 @@
+# Nuxt dev/build outputs
+apps/nuxt/.output
+apps/nuxt/.data
+apps/nuxt/.nuxt
+apps/nuxt/.nitro
+apps/nuxt/.cache
+apps/nuxt/dist
+
+# Node dependencies
+apps/nuxt/node_modules
+
+# Logs
+apps/nuxt/logs
+apps/nuxt/*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Local env files
+apps/nuxt/.env
+apps/nuxt/.env.*
+apps/nuxt/!.env.example
+
+# Docker specific stuff
+docker/caddy/*.pem
+docker/mount/*

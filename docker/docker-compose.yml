@@ -1,0 +1,54 @@
+services:
+    app:
+        container_name: test_nuxt
+        ports:
+            - "24678:24678"
+            - "3000:3000"
+        user: root
+        build:
+            context: .
+            dockerfile: Dockerfile
+        working_dir: /srv
+        volumes:
+            - ./mount/apps/nuxt/:/srv
+        command: sh -c "npm i -g pnpm && pnpm i && pnpm run dev"
+        # command: sh -c "node .output/server/index.mjs"
+        stdin_open: true
+        tty: true
+        networks:
+            - default
+
+    mysql:
+        container_name: test_mysql
+        image: mysql:8.0
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: test_dev
+            MYSQL_USER: test
+            MYSQL_PASSWORD: password
+        volumes:
+            - mysql_data:/var/lib/mysql:rw
+
+    phpmyadmin:
+        container_name: test_pma
+        image: phpmyadmin
+        environment:
+            DOMAIN_NAME: pma.test.wip
+            PMA_HOSTS: mysql
+            PMA_USER: root
+            PMA_PASSWORD: root
+            PMA_ARBITRARY: 1
+
+    caddy:
+        container_name: test_caddy
+        image: caddy:2.8
+        environment:
+            DOMAIN_NAME: test.wip
+        volumes:
+            - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+            - ./caddy/test.wip.pem:/usr/local/etc/caddy/certs/test.wip.pem
+            - ./caddy/test.wip-key.pem:/usr/local/etc/caddy/certs/test.wip-key.pem
+            - ./mount/apps/nuxt/:/srv
+
+volumes:
+    mysql_data:

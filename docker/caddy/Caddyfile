@@ -1,0 +1,6 @@
+:443 {
+    tls /usr/local/etc/caddy/certs/test.wip.pem /usr/local/etc/caddy/certs/test.wip-key.pem
+
+    reverse_proxy app:3000
+    reverse_proxy app:24678
+}

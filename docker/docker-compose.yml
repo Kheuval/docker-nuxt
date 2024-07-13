@@ -2,7 +2,6 @@ services:
     app:
         container_name: test_nuxt
         ports:
-            - "24678:24678"
             - "3000:3000"
         user: root
         build:

@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
-  devtools: { enabled: true },
+  devtools: { enabled: true, disableAuthorization: true },
   vite: { // @see https://github.com/nuxt/nuxt/issues/27558
     server: {
       hmr: {
